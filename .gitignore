@@ -1,0 +1,16 @@
+# Node / Astro
+node_modules/
+dist/
+.astro/
+
+# Environment & secrets
+.env
+.env.*
+
+# Local design mockups (throwaway comparison pages, not site source)
+mockups/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.log

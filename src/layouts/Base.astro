@@ -1,0 +1,120 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="generator" content={Astro.generator} />
+    <script is:inline>
+      // Apply a stored theme choice before first paint to avoid a flash.
+      const stored = localStorage.getItem('theme');
+      if (stored === 'light' || stored === 'dark') {
+        document.documentElement.dataset.theme = stored;
+      }
+    </script>
+  </head>
+  <body>
+    <header class="site-header">
+      <nav aria-label="Site">
+        <a class="home-link" href="/">Kyle Chen</a>
+        <div class="nav-links">
+          <a href="/#projects">Projects</a>
+          <a href="/resume.pdf">Resume</a>
+          <button class="theme-toggle" aria-label="Switch color theme">
+            <svg
+              class="icon-moon"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+            <svg
+              class="icon-sun"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+            </svg>
+          </button>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <p>
+        <a href="mailto:chenchhaykyle@gmail.com">chenchhaykyle@gmail.com</a> ·
+        <a href="https://github.com/ang-2001">GitHub</a> ·
+        <a href="https://www.linkedin.com/in/kyle-chen-computer-scientist/">LinkedIn</a>
+      </p>
+      <p>Built with Astro and plain CSS — no frameworks, no trackers; the only JavaScript is the theme toggle. This site's repository is my public code sample.</p>
+    </footer>
+    <script is:inline>
+      const toggle = document.querySelector('.theme-toggle');
+      const systemDark = matchMedia('(prefers-color-scheme: dark)');
+      const isDark = () =>
+        document.documentElement.dataset.theme
+          ? document.documentElement.dataset.theme === 'dark'
+          : systemDark.matches;
+      const setLabel = () => {
+        toggle.setAttribute(
+          'aria-label',
+          isDark() ? 'Switch to light theme' : 'Switch to dark theme'
+        );
+      };
+      toggle.addEventListener('click', () => {
+        const next = isDark() ? 'light' : 'dark';
+        if ((next === 'dark') === systemDark.matches) {
+          // Choice matches the system again — drop the override entirely.
+          delete document.documentElement.dataset.theme;
+          localStorage.removeItem('theme');
+        } else {
+          document.documentElement.dataset.theme = next;
+          localStorage.setItem('theme', next);
+        }
+        setLabel();
+      });
+      // Keep the label honest if the OS theme changes live and there's no
+      // explicit override — the CSS updates on its own, the label needs a nudge.
+      systemDark.addEventListener('change', () => {
+        if (!document.documentElement.dataset.theme) setLabel();
+      });
+      setLabel();
+    </script>
+  </body>
+</html>

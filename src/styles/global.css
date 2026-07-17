@@ -1,0 +1,452 @@
+/* Design tokens — light is default; dark applies when the visitor picks it
+   with the header toggle (html[data-theme]) or, with no stored choice, when
+   the system prefers it. The dark token block appears twice below — keep the
+   two copies in sync. (Revises REVIEW.md §2b: toggle added 2026-07-16.)
+   Palette: "B2 true purple" — one accent, purple-tinted neutrals. */
+:root {
+  --bg: #ffffff;
+  --surface: #f8f5fb;
+  --text: #201b26;
+  --muted: #5e5569;
+  --accent: #9333ea;
+  --border: #e0d8e8;
+  --max-width: 58rem;
+  --mono: ui-monospace, "Cascadia Code", "Segoe UI Mono", Consolas, monospace;
+  --ease: 0.18s ease;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: #151020;
+  --surface: #1f1930;
+  --text: #ece6f3;
+  --muted: #a99fc0;
+  --accent: #c084fc;
+  --border: #362c4a;
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #151020;
+    --surface: #1f1930;
+    --text: #ece6f3;
+    --muted: #a99fc0;
+    --accent: #c084fc;
+    --border: #362c4a;
+    color-scheme: dark;
+  }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  width: min(var(--max-width), 100% - 2.5rem);
+  margin-inline: auto;
+  flex: 1;
+}
+
+h1, h2, h3 {
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+a {
+  color: var(--accent);
+  text-underline-offset: 0.15em;
+}
+
+/* Visible focus everywhere — keyboard operability is a v1 requirement. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Craft layer: one small interaction vocabulary used consistently —
+   links grow their underline, arrows nudge, cards lift while their
+   siblings soften. CSS-only; hover effects gated to hover-capable
+   devices; everything collapses under prefers-reduced-motion. */
+.nav-links a,
+.read-more {
+  text-decoration: none;
+  background-image: linear-gradient(var(--accent), var(--accent));
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size var(--ease), color var(--ease);
+}
+
+.nav-links a:hover,
+.nav-links a:focus-visible,
+.read-more:hover,
+.read-more:focus-visible {
+  background-size: 100% 2px;
+}
+
+.read-more span {
+  display: inline-block;
+  transition: transform var(--ease);
+}
+
+.read-more:hover span,
+.read-more:focus-visible span {
+  transform: translateX(3px);
+}
+
+/* Header / footer */
+.site-header {
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header nav {
+  width: min(var(--max-width), 100% - 2.5rem);
+  margin-inline: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-block: 0.9rem;
+  gap: 1rem;
+}
+
+.home-link {
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.nav-links a {
+  color: var(--text);
+}
+
+.nav-links a:hover,
+.home-link:hover {
+  color: var(--accent);
+}
+
+/* Theme toggle — shows the theme you'd switch to: moon in light mode,
+   sun in dark. Visibility follows the same three branches as the tokens. */
+.theme-toggle {
+  border: 0;
+  background: none;
+  padding: 0.2rem;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  color: var(--text);
+  cursor: pointer;
+  transition: color var(--ease);
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+}
+
+.theme-toggle .icon-sun {
+  display: none;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-sun {
+  display: block;
+}
+
+:root[data-theme="dark"] .theme-toggle .icon-moon {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-toggle .icon-sun {
+    display: block;
+  }
+
+  :root:not([data-theme="light"]) .theme-toggle .icon-moon {
+    display: none;
+  }
+}
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  margin-top: 4rem;
+  padding-block: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.site-footer p + p {
+  margin-top: 0.35rem;
+}
+
+/* Hero */
+.hero {
+  padding-block: 3.5rem 2.5rem;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+}
+
+.hero .tagline {
+  font-size: 1.15rem;
+  color: var(--muted);
+  max-width: 42rem;
+  margin-top: 0.75rem;
+}
+
+.contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.4rem;
+  list-style: none;
+}
+
+.contact-links a {
+  display: inline-block;
+  padding: 0.45rem 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: border-color var(--ease), color var(--ease);
+}
+
+.contact-links a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Sections */
+section + section {
+  margin-top: 2.75rem;
+}
+
+section > h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+/* Skills */
+.skills-list {
+  list-style: none;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.skills-list .label {
+  font-weight: 600;
+}
+
+/* Experience */
+.experience-role {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+}
+
+.experience-role h3 {
+  font-size: 1.05rem;
+}
+
+.experience-dates {
+  color: var(--muted);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.experience p {
+  margin-top: 0.5rem;
+  max-width: 46rem;
+}
+
+/* Metrics render in monospace — the site's one typographic signature. */
+.experience .stats {
+  font-family: var(--mono);
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 0.4rem;
+}
+
+/* Project cards */
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: 1rem;
+  list-style: none;
+}
+
+.project-card {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.1rem 1.2rem;
+  background: var(--surface);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  transition: transform var(--ease), border-color var(--ease),
+    box-shadow var(--ease), opacity var(--ease);
+}
+
+/* Hovered card sharpens and lifts; siblings recede a touch. Keyboard
+   focus inside a card gets the same lift for parity. */
+@media (hover: hover) {
+  .project-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+    box-shadow: 0 6px 18px rgb(0 0 0 / 0.08);
+  }
+
+  .project-grid:hover > .project-card:not(:hover) {
+    opacity: 0.72;
+  }
+}
+
+.project-card:focus-within {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+}
+
+.project-card h3 {
+  font-size: 1.05rem;
+}
+
+.project-card .impact {
+  font-family: var(--mono);
+  font-weight: 600;
+  color: var(--accent);
+  font-size: 0.88rem;
+}
+
+.project-card .summary {
+  font-size: 0.92rem;
+  flex: 1;
+}
+
+.project-card .tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.project-card .tags li {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.05rem 0.55rem;
+  background: var(--bg);
+}
+
+.project-card .read-more {
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Case study pages */
+.case-study {
+  padding-top: 2.5rem;
+  max-width: 46rem;
+}
+
+.case-study .back {
+  font-size: 0.9rem;
+  margin-bottom: 1.25rem;
+}
+
+.case-study h1 {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+}
+
+.tldr {
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 6px;
+  background: var(--surface);
+  padding: 1rem 1.2rem;
+  margin-block: 1.25rem;
+}
+
+.tldr .impact {
+  font-family: var(--mono);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--accent);
+}
+
+.tldr p + p {
+  margin-top: 0.4rem;
+}
+
+.case-study .meta {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.75rem;
+}
+
+.prose h2 {
+  font-size: 1.25rem;
+  margin: 1.75rem 0 0.6rem;
+}
+
+.prose p + p {
+  margin-top: 0.75rem;
+}
+
+.prose ul {
+  padding-left: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.prose li + li {
+  margin-top: 0.3rem;
+}
+
+.prose code {
+  font-family: var(--mono);
+  font-size: 0.88em;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.05em 0.3em;
+}
+
+/* Motion is an enhancement, never a requirement. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .project-card:hover,
+  .project-card:focus-within {
+    transform: none;
+  }
+}

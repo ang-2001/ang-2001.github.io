@@ -1,0 +1,80 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+// Case studies first, then newest first.
+const projects = (await getCollection('projects')).sort((a, b) => {
+  if (a.data.caseStudy !== b.data.caseStudy) return a.data.caseStudy ? -1 : 1;
+  return b.data.date.valueOf() - a.data.date.valueOf();
+});
+---
+
+<Base
+  title="Kyle Chen — Software Engineer"
+  description="Software engineer specializing in design systems, performance, and CI/CD. 100+ production components, millions of CMS API calls eliminated, zero-touch releases."
+>
+  <section class="hero">
+    <h1>Kyle Chen</h1>
+    <p class="tagline">
+      Software engineer who builds design systems, caching layers, and CI/CD
+      pipelines that ship with numbers attached — 100+ production components,
+      100K+ weekly API calls cached to near zero, releases with zero manual steps.
+    </p>
+    <ul class="contact-links">
+      <li><a href="mailto:chenchhaykyle@gmail.com">Email</a></li>
+      <li><a href="https://github.com/ang-2001">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/kyle-chen-computer-scientist/">LinkedIn</a></li>
+      <li><a href="/resume.pdf">Resume (PDF)</a></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="skills-heading">
+    <h2 id="skills-heading">Skills</h2>
+    <ul class="skills-list">
+      <li><span class="label">Languages:</span> TypeScript, JavaScript, Python, Java</li>
+      <li><span class="label">Frontend:</span> React, Next.js, Angular, TailwindCSS, Storybook, HTML, CSS</li>
+      <li><span class="label">Backend &amp; Data:</span> Node.js, MongoDB, Express.js, tRPC, DrizzleORM, MySQL</li>
+      <li><span class="label">DevOps &amp; AI:</span> GitHub Actions, Docker, GCP (Cloud Run, Cloud Build), Turborepo, Claude Code</li>
+    </ul>
+  </section>
+
+  <section class="experience" aria-labelledby="experience-heading">
+    <h2 id="experience-heading">Experience</h2>
+    <div class="experience-role">
+      <h3>Exxact Corporation — Software Engineering Intern</h3>
+      <span class="experience-dates">April 2025 – June 2026 · Fremont, CA</span>
+    </div>
+    <p>
+      Owned the frontend platform for two e-commerce storefronts: led the
+      four-phase consolidation of the exxcom-ui design system, built the team's
+      CI/CD from zero across a 39-repository monorepo, and shipped performance,
+      accessibility, and security work with measured outcomes.
+    </p>
+    <p class="stats">580+ commits · 115 merged PRs · 13 months</p>
+  </section>
+
+  <section id="projects" aria-labelledby="projects-heading">
+    <h2 id="projects-heading">Projects</h2>
+    <ul class="project-grid">
+      {
+        projects.map((p) => (
+          <li class="project-card">
+            <h3>{p.data.title}</h3>
+            <p class="impact">{p.data.impact}</p>
+            <p class="summary">{p.data.summary}</p>
+            <ul class="tags" aria-label="Technologies">
+              {p.data.tags.map((tag) => (
+                <li>{tag}</li>
+              ))}
+            </ul>
+            {p.data.caseStudy && (
+              <a class="read-more" href={`/projects/${p.id}/`}>
+                Read case study <span aria-hidden="true">→</span>
+              </a>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>
