@@ -48,9 +48,7 @@
   li { margin-bottom: 3pt; }
   .skills p, .additional p { margin-bottom: 2pt; }
   .label { font-weight: 700; }
-  .project { margin-bottom: 4pt; }
-  .project-title { font-weight: 700; }
-  .stack { font-style: italic; color: #333; font-size: 9.5pt; }
+  .objective { margin-bottom: 2pt; }
   strong { font-weight: 700; }
 </style>
 </head>
@@ -59,17 +57,28 @@
 <h1>Kyle Chen</h1>
 <p class="contact">
   Bay Area, CA &nbsp;|&nbsp;
-  <a href="mailto:chenchhaykyle@gmail.com">chenchhaykyle@gmail.com</a> &nbsp;|&nbsp;
+  (408)-797-7794 &nbsp;|&nbsp;
+  <a href="mailto:kyle.chen.0830@gmail.com">kyle.chen.0830@gmail.com</a> &nbsp;|&nbsp;
   <a href="https://www.linkedin.com/in/kyle-chen-computer-scientist/">linkedin.com/in/kyle-chen-computer-scientist</a> &nbsp;|&nbsp;
-  <a href="https://github.com/ang-2001">github.com/ang-2001</a>
+  <a href="https://ang-2001.github.io">ang-2001.github.io</a>
 </p>
+
+<h2>Objective</h2>
+<p class="objective">Frontend-leaning full-stack engineer with hands-on fluency in AI-assisted development.</p>
+
+<h2>Education</h2>
+<div class="role-line">
+  <span class="role">San José State University, Computer Science Department — B.S. in Computer Science, <em>Magna Cum Laude</em></span>
+  <span class="dates">Graduated May 2024 &nbsp;|&nbsp; San José, CA</span>
+</div>
 
 <h2>Technical Skills</h2>
 <div class="skills">
-  <p><span class="label">Languages:</span> TypeScript, JavaScript, Python, Java</p>
-  <p><span class="label">Frontend:</span> React, Next.js, Angular, TailwindCSS, Storybook, shadcn/ui, HTML, CSS</p>
-  <p><span class="label">Backend &amp; Data:</span> Node.js, MongoDB, Express.js, tRPC, DrizzleORM, MySQL</p>
-  <p><span class="label">DevOps &amp; AI:</span> GitHub Actions, Docker, GCP (Cloud Run, Cloud Build), Turborepo, Claude Code</p>
+  <p><span class="label">Core Technologies:</span> TypeScript, JavaScript, React, Next.js, Node.js, Python, Java</p>
+  <p><span class="label">Frontend &amp; UI:</span> React, Next.js, Angular, TailwindCSS, Storybook, shadcn/ui, HTML, CSS</p>
+  <p><span class="label">Backend &amp; Data:</span> MongoDB, MySQL, Firebase, Express.js, tRPC, DrizzleORM</p>
+  <p><span class="label">DevOps &amp; AI:</span> Git, GitHub Actions, Docker, GCP (Cloud Run, Cloud Build), pnpm, Turborepo, Vite, Claude Code</p>
+  <p><span class="label">Additional:</span> Angular, Notion, Slack</p>
 </div>
 
 <h2>Professional Experience</h2>
@@ -78,38 +87,19 @@
   <span class="dates">April 2025 – June 2026 &nbsp;|&nbsp; Fremont, CA</span>
 </div>
 <ul>
-  <li>Led the four-phase consolidation of two fragmented component packages into the unified <strong>exxcom-ui design system</strong> — 100+ production components reorganized into an Atomic Design taxonomy with CSS-variable-driven multi-theme architecture serving two storefronts; <strong>580+ commits and 115 merged PRs</strong> over 13-month tenure</li>
-  <li>Engineered a MongoDB caching layer for Contentstack CMS with webhook-based invalidation on publish events, cutting API usage on 10 high-traffic pages from <strong>100K+ calls per page per week to near zero</strong> — bringing the account back under its 5M-call limit (from 6M+) without a paid plan increase, and keeping pages online during CMS outages</li>
-  <li>Bootstrapped CI/CD from zero across a 39-repository monorepo: custom Node.js path-based change detection, semantic-release automation (<strong>zero manual release steps since May 2025</strong>), and GCP Workload Identity Federation for keyless deploys</li>
-  <li>Designed multi-layer bot and LLM-agent detection for contact forms — behavioral keystroke scoring, <code>navigator.webdriver</code> fingerprinting, dynamic honeypot, and a runtime-injected reverse prompt-injection guard — blocking Playwright, browser-use, and Stagehand agents with <strong>zero false positives</strong> on human submissions</li>
-  <li>Led <strong>WCAG 2.1 AA accessibility initiative</strong> across 15+ components (focus design tokens, ARIA attributes, keyboard navigation); hardened Angular Universal SSR in 11 PRs resolving hydration mismatches and iOS-specific rendering failures</li>
-  <li>Rewrote a Cloud Run redirect microservice suffering connection-pool exhaustion: replaced per-request DB connections with pooled client and full-collection regex scans with indexed two-tier lookup; net <strong>−232 lines</strong> with health checks and graceful shutdown added</li>
+  <li>Led four-phase consolidation of two fragmented component packages into the unified <strong>exxcom-ui design system</strong> — 100+ production components reorganized into an Atomic Design taxonomy with CSS-variable-driven multi-theme architecture serving two storefronts</li>
+  <li>Engineered a MongoDB caching layer for Contentstack CMS with webhook-based invalidation on publish events, cutting API usage on 10 high-traffic pages from <strong>100K+ calls per page per week to near zero</strong> — bringing it under 5M-call limit (from 6M+) without a paid plan increase, and keeping pages online during CMS outages</li>
+  <li>Bootstrapped CI/CD from zero across a 39-repository monorepo: custom Node.js path-based change detection, semantic-release automation, and GCP Workload Identity Federation for keyless deploys</li>
+  <li>Designed multi-layer bot and LLM-agent detection for contact forms — behavioral keystroke scoring, <code>navigator.webdriver</code> fingerprinting, honeypot — blocking Playwright, browser-use, and Stagehand agents with <strong>zero false positives</strong></li>
+  <li>Led <strong>WCAG 2.1 AA accessibility initiative</strong> across 15+ components (focus design tokens, ARIA attributes, keyboard navigation)</li>
+  <li>Rewrote a Cloud Run blog redirect microservice suffering connection-pool exhaustion</li>
+  <li>Among first engineers on the team to adopt <strong>Claude Code</strong></li>
 </ul>
 
-<h2>Projects</h2>
-<div class="project">
-  <p><span class="project-title">OFS — Online Grocery Delivery Application</span> &nbsp;<span class="stack">Next.js, TypeScript, TailwindCSS, MySQL, DrizzleORM, Docker</span></p>
-  <ul>
-    <li>Built full-stack grocery delivery app with 5-person team in an 8-week sprint; implemented RESTful API routes with DrizzleORM/MySQL and Edgestore image upload; delivered responsive UI with full input validation</li>
-  </ul>
-</div>
-<div class="project">
-  <p><span class="project-title">ATCG Database — Trading Card Game Web Application</span> &nbsp;<span class="stack">React, Node.js, Express.js, MySQL</span></p>
-  <ul>
-    <li>Developed database web app with 5-person team in 4 weeks; built Express.js REST API and multi-parameter search query system connecting frontend components to database operations</li>
-  </ul>
-</div>
-
-<h2>Education</h2>
-<div class="role-line">
-  <span class="role">San José State University — B.S. in Computer Science, <em>Magna Cum Laude</em></span>
-  <span class="dates">May 2024 &nbsp;|&nbsp; San José, CA</span>
-</div>
-
-<h2>Additional</h2>
+<h2>Additional Information</h2>
 <div class="additional">
   <p><span class="label">Methodologies:</span> Agile, CI/CD, DevOps, Atomic Design, Component-Driven Development</p>
-  <p><span class="label">AI Workflow:</span> Daily practitioner of Claude and Claude Code for prototyping, code review acceleration, and rapid iteration on complex UI components</p>
+  <p><span class="label">Soft Skills:</span> Cross-functional Collaboration, Technical Documentation, Code Review, Independent Problem Solving</p>
 </div>
 
 </body>

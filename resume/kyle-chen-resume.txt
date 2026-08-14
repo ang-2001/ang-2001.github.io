@@ -1,42 +1,40 @@
 KYLE CHEN
-Bay Area, CA | chenchhaykyle@gmail.com | linkedin.com/in/kyle-chen-computer-scientist | github.com/ang-2001
+Bay Area, CA | (408)-797-7794 | kyle.chen.0830@gmail.com | linkedin.com/in/kyle-chen-computer-scientist | ang-2001.github.io
+
+
+OBJECTIVE
+
+Frontend-leaning full-stack engineer with hands-on fluency in AI-assisted development.
+
+
+EDUCATION
+
+San José State University, Computer Science Department — B.S. in Computer Science, Magna Cum Laude | Graduated May 2024 | San José, CA
 
 
 TECHNICAL SKILLS
 
-Languages: TypeScript, JavaScript, Python, Java
-Frontend: React, Next.js, Angular, TailwindCSS, Storybook, shadcn/ui, HTML, CSS
-Backend & Data: Node.js, MongoDB, Express.js, tRPC, DrizzleORM, MySQL
-DevOps & AI: GitHub Actions, Docker, GCP (Cloud Run, Cloud Build), Turborepo, Claude Code
+Core Technologies: TypeScript, JavaScript, React, Next.js, Node.js, Python, Java
+Frontend & UI: React, Next.js, Angular, TailwindCSS, Storybook, shadcn/ui, HTML, CSS
+Backend & Data: MongoDB, MySQL, Firebase, Express.js, tRPC, DrizzleORM
+DevOps & AI: Git, GitHub Actions, Docker, GCP (Cloud Run, Cloud Build), pnpm, Turborepo, Vite, Claude Code
+Additional: Angular, Notion, Slack
 
 
 PROFESSIONAL EXPERIENCE
 
 Exxact Corporation — Software Engineering Intern | April 2025 – June 2026 | Fremont, CA
 
-• Led the four-phase consolidation of two fragmented component packages into the unified exxcom-ui design system — 100+ production components reorganized into an Atomic Design taxonomy with CSS-variable-driven multi-theme architecture serving two storefronts; 580+ commits and 115 merged PRs over 13-month tenure
-• Engineered a MongoDB caching layer for Contentstack CMS with webhook-based invalidation on publish events, cutting API usage on 10 high-traffic pages from 100K+ calls per page per week to near zero — bringing the account back under its 5M-call limit (from 6M+) without a paid plan increase, and keeping pages online during CMS outages
-• Bootstrapped CI/CD from zero across a 39-repository monorepo: custom Node.js path-based change detection, semantic-release automation with zero manual release steps since May 2025, and GCP Workload Identity Federation for keyless deploys
-• Designed multi-layer bot and LLM-agent detection for contact forms — behavioral keystroke scoring, navigator.webdriver fingerprinting, dynamic honeypot, and a runtime-injected reverse prompt-injection guard — blocking Playwright, browser-use, and Stagehand agents with zero false positives on human submissions
-• Led WCAG 2.1 AA accessibility initiative across 15+ components (focus design tokens, ARIA attributes, keyboard navigation); hardened Angular Universal SSR in 11 PRs resolving hydration mismatches and iOS-specific rendering failures
-• Rewrote a Cloud Run redirect microservice suffering connection-pool exhaustion: replaced per-request DB connections with pooled client and full-collection regex scans with indexed two-tier lookup; net −232 lines with health checks and graceful shutdown added
+• Led four-phase consolidation of two fragmented component packages into the unified exxcom-ui design system — 100+ production components reorganized into an Atomic Design taxonomy with CSS-variable-driven multi-theme architecture serving two storefronts
+• Engineered a MongoDB caching layer for Contentstack CMS with webhook-based invalidation on publish events, cutting API usage on 10 high-traffic pages from 100K+ calls per page per week to near zero — bringing it under 5M-call limit (from 6M+) without a paid plan increase, and keeping pages online during CMS outages
+• Bootstrapped CI/CD from zero across a 39-repository monorepo: custom Node.js path-based change detection, semantic-release automation, and GCP Workload Identity Federation for keyless deploys
+• Designed multi-layer bot and LLM-agent detection for contact forms — behavioral keystroke scoring, navigator.webdriver fingerprinting, honeypot — blocking Playwright, browser-use, and Stagehand agents with zero false positives
+• Led WCAG 2.1 AA accessibility initiative across 15+ components (focus design tokens, ARIA attributes, keyboard navigation)
+• Rewrote a Cloud Run blog redirect microservice suffering connection-pool exhaustion
+• Among first engineers on the team to adopt Claude Code
 
 
-PROJECTS
-
-OFS — Online Grocery Delivery Application | Next.js, TypeScript, TailwindCSS, MySQL, DrizzleORM, Docker
-• Built full-stack grocery delivery app with 5-person team in an 8-week sprint; implemented RESTful API routes with DrizzleORM/MySQL and Edgestore image upload; delivered responsive UI with full input validation
-
-ATCG Database — Trading Card Game Web Application | React, Node.js, Express.js, MySQL
-• Developed database web app with 5-person team in 4 weeks; built Express.js REST API and multi-parameter search query system connecting frontend components to database operations
-
-
-EDUCATION
-
-San José State University — B.S. in Computer Science, Magna Cum Laude | May 2024 | San José, CA
-
-
-ADDITIONAL
+ADDITIONAL INFORMATION
 
 Methodologies: Agile, CI/CD, DevOps, Atomic Design, Component-Driven Development
-AI Workflow: Daily practitioner of Claude and Claude Code for prototyping, code review acceleration, and rapid iteration on complex UI components
+Soft Skills: Cross-functional Collaboration, Technical Documentation, Code Review, Independent Problem Solving
