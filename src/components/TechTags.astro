@@ -1,0 +1,21 @@
+---
+import { Icon } from 'astro-icon/components';
+import { techIconMap } from '../lib/icons';
+
+interface Props {
+  items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="tags" aria-label="Technologies">
+  {
+    items.map((item) => (
+      <li>
+        {techIconMap[item] && <Icon class="tag-icon" name={techIconMap[item]} aria-hidden="true" />}
+        {item}
+      </li>
+    ))
+  }
+</ul>

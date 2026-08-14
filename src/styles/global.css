@@ -2,14 +2,15 @@
    with the header toggle (html[data-theme]) or, with no stored choice, when
    the system prefers it. The dark token block appears twice below — keep the
    two copies in sync. (Revises REVIEW.md §2b: toggle added 2026-07-16.)
-   Palette: "B2 true purple" — one accent, purple-tinted neutrals. */
+   Palette: "Cobalt blue" — one accent, cool neutrals. (Revised from purple
+   2026-07-21 per mockups/edit_notes; see mockups/mockup-6-colors.html option A.) */
 :root {
   --bg: #ffffff;
-  --surface: #f8f5fb;
-  --text: #201b26;
-  --muted: #5e5569;
-  --accent: #9333ea;
-  --border: #e0d8e8;
+  --surface: #f5f7f9;
+  --text: #1b1f24;
+  --muted: #545d66;
+  --accent: #1d4ed8;
+  --border: #d8dee4;
   --max-width: 58rem;
   --mono: ui-monospace, "Cascadia Code", "Segoe UI Mono", Consolas, monospace;
   --ease: 0.18s ease;
@@ -17,23 +18,23 @@
 }
 
 :root[data-theme="dark"] {
-  --bg: #151020;
-  --surface: #1f1930;
-  --text: #ece6f3;
-  --muted: #a99fc0;
-  --accent: #c084fc;
-  --border: #362c4a;
+  --bg: #10151a;
+  --surface: #1a2129;
+  --text: #e6edf3;
+  --muted: #9db0c0;
+  --accent: #79aaff;
+  --border: #2c3843;
   color-scheme: dark;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #151020;
-    --surface: #1f1930;
-    --text: #ece6f3;
-    --muted: #a99fc0;
-    --accent: #c084fc;
-    --border: #362c4a;
+    --bg: #10151a;
+    --surface: #1a2129;
+    --text: #e6edf3;
+    --muted: #9db0c0;
+    --accent: #79aaff;
+    --border: #2c3843;
     color-scheme: dark;
   }
 }
@@ -82,11 +83,11 @@ a {
 }
 
 /* Craft layer: one small interaction vocabulary used consistently —
-   links grow their underline, arrows nudge, cards lift while their
-   siblings soften. CSS-only; hover effects gated to hover-capable
-   devices; everything collapses under prefers-reduced-motion. */
-.nav-links a,
-.read-more {
+   nav links grow their underline, the read-more/repo button's arrow
+   nudges, cards lift while their siblings soften. CSS-only; hover effects
+   gated to hover-capable devices; everything collapses under
+   prefers-reduced-motion. */
+.nav-links a {
   text-decoration: none;
   background-image: linear-gradient(var(--accent), var(--accent));
   background-size: 0% 2px;
@@ -96,10 +97,36 @@ a {
 }
 
 .nav-links a:hover,
-.nav-links a:focus-visible,
+.nav-links a:focus-visible {
+  background-size: 100% 2px;
+}
+
+/* A bordered button rather than a text link — distinct from the h3 above it
+   and, as a flex item in a column-flex card, needs align-self so it doesn't
+   stretch to the card's full width (the default align-items: stretch would
+   otherwise make its hover underline/border span the whole card). */
+.read-more {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: border-color var(--ease), color var(--ease);
+}
+
 .read-more:hover,
 .read-more:focus-visible {
-  background-size: 100% 2px;
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.read-more .icon {
+  width: 14px;
+  height: 14px;
 }
 
 .read-more span {
@@ -196,8 +223,23 @@ a {
   color: var(--muted);
 }
 
-.site-footer p + p {
-  margin-top: 0.35rem;
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.footer-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.footer-links .icon {
+  width: 15px;
+  height: 15px;
 }
 
 /* Hero */
@@ -225,7 +267,9 @@ a {
 }
 
 .contact-links a {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
   padding: 0.45rem 0.9rem;
   border: 1px solid var(--border);
   border-radius: 6px;
@@ -237,6 +281,11 @@ a {
 .contact-links a:hover {
   border-color: var(--accent);
   color: var(--accent);
+}
+
+.contact-links .icon {
+  width: 15px;
+  height: 15px;
 }
 
 /* Sections */
@@ -260,36 +309,44 @@ section > h2 {
   font-weight: 600;
 }
 
-/* Experience */
-.experience-role {
+.skills-groups {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.skills-group h3 {
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+}
+
+/* Icon+label pill — used for tech tags on project cards, the case-study
+   tag line, and the homepage skills groups (TechTags.astro). */
+.tags {
+  list-style: none;
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
   flex-wrap: wrap;
-  gap: 0.25rem 1rem;
-}
-
-.experience-role h3 {
-  font-size: 1.05rem;
-}
-
-.experience-dates {
+  gap: 0.35rem;
+  font-size: 0.78rem;
   color: var(--muted);
-  font-size: 0.9rem;
-  white-space: nowrap;
 }
 
-.experience p {
-  margin-top: 0.5rem;
-  max-width: 46rem;
+.tags li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.05rem 0.55rem;
+  background: var(--bg);
 }
 
-/* Metrics render in monospace — the site's one typographic signature. */
-.experience .stats {
-  font-family: var(--mono);
-  color: var(--muted);
-  font-size: 0.85rem;
-  margin-top: 0.4rem;
+.tag-icon {
+  width: 12px;
+  height: 12px;
 }
 
 /* Project cards */
@@ -347,22 +404,6 @@ section > h2 {
   flex: 1;
 }
 
-.project-card .tags {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  font-size: 0.78rem;
-  color: var(--muted);
-}
-
-.project-card .tags li {
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  padding: 0.05rem 0.55rem;
-  background: var(--bg);
-}
-
 .project-card .read-more {
   font-size: 0.9rem;
   font-weight: 500;
@@ -390,6 +431,10 @@ section > h2 {
   background: var(--surface);
   padding: 1rem 1.2rem;
   margin-block: 1.25rem;
+}
+
+.case-study .tags {
+  margin-bottom: 0.6rem;
 }
 
 .tldr .impact {
@@ -434,6 +479,72 @@ section > h2 {
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: 0.05em 0.3em;
+}
+
+/* Resume page */
+.resume-page {
+  padding-top: 2.5rem;
+  max-width: 46rem;
+}
+
+.resume-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.resume-header h1 {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+}
+
+.resume-contact {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 0.35rem;
+}
+
+.download-button {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: border-color var(--ease), color var(--ease);
+}
+
+.download-button:hover,
+.download-button:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.download-button .icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Shared role/dates line — Education and Professional Experience entries on
+   the resume page. */
+.role-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+}
+
+.role-dates {
+  color: var(--muted);
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 
 /* Motion is an enhancement, never a requirement. */

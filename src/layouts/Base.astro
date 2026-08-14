@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import { Icon } from 'astro-icon/components';
+import { contactIcons } from '../lib/icons';
 
 interface Props {
   title: string;
@@ -39,7 +41,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
         <a class="home-link" href="/">Kyle Chen</a>
         <div class="nav-links">
           <a href="/#projects">Projects</a>
-          <a href="/resume.pdf">Resume</a>
+          <a href="/resume">Resume</a>
           <button class="theme-toggle" aria-label="Switch color theme">
             <svg
               class="icon-moon"
@@ -77,12 +79,17 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
       <slot />
     </main>
     <footer class="site-footer">
-      <p>
-        <a href="mailto:chenchhaykyle@gmail.com">chenchhaykyle@gmail.com</a> ·
-        <a href="https://github.com/ang-2001">GitHub</a> ·
-        <a href="https://www.linkedin.com/in/kyle-chen-computer-scientist/">LinkedIn</a>
+      <p class="footer-links">
+        <a href="mailto:kyle.chen.0830@gmail.com">kyle.chen.0830@gmail.com</a>
+        <a href="https://github.com/ang-2001">
+          <Icon class="icon" name={contactIcons.github} aria-hidden="true" />
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/kyle-chen-computer-scientist/">
+          <Icon class="icon" name={contactIcons.linkedin} aria-hidden="true" />
+          LinkedIn
+        </a>
       </p>
-      <p>Built with Astro and plain CSS — no frameworks, no trackers; the only JavaScript is the theme toggle. This site's repository is my public code sample.</p>
     </footer>
     <script is:inline>
       const toggle = document.querySelector('.theme-toggle');

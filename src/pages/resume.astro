@@ -1,0 +1,110 @@
+---
+import { Icon } from 'astro-icon/components';
+import Base from '../layouts/Base.astro';
+import { uiIcons } from '../lib/icons';
+---
+
+<Base
+  title="Resume — Kyle Chen"
+  description="Kyle Chen's resume — software engineer specializing in design systems, performance, and CI/CD."
+>
+  <article class="resume-page">
+    <div class="resume-header">
+      <div>
+        <h1>Kyle Chen</h1>
+        <p class="resume-contact">
+          Bay Area, CA · (408) 797-7794 ·
+          <a href="mailto:kyle.chen.0830@gmail.com">kyle.chen.0830@gmail.com</a> ·
+          <a href="https://www.linkedin.com/in/kyle-chen-computer-scientist/">LinkedIn</a> ·
+          <a href="https://ang-2001.github.io">ang-2001.github.io</a>
+        </p>
+      </div>
+      <a class="download-button" href="/resume.pdf" download>
+        <Icon class="icon" name={uiIcons.download} aria-hidden="true" />
+        Download PDF
+      </a>
+    </div>
+
+    <section>
+      <h2>Objective</h2>
+      <p>Frontend-leaning full-stack engineer with hands-on fluency in AI-assisted development.</p>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      <div class="role-line">
+        <span>
+          San José State University, Computer Science Department — B.S. in Computer Science,
+          <em>Magna Cum Laude</em>
+        </span>
+        <span class="role-dates">Graduated May 2024 · San José, CA</span>
+      </div>
+    </section>
+
+    <section>
+      <h2>Technical Skills</h2>
+      <ul class="skills-list">
+        <li><span class="label">Core Technologies:</span> TypeScript, JavaScript, React, Next.js, Node.js, Python, Java</li>
+        <li><span class="label">Frontend &amp; UI:</span> React, Next.js, Angular, TailwindCSS, Storybook, shadcn/ui, HTML, CSS</li>
+        <li><span class="label">Backend &amp; Data:</span> MongoDB, MySQL, Firebase, Express.js, tRPC, DrizzleORM</li>
+        <li><span class="label">DevOps &amp; AI:</span> Git, GitHub Actions, Docker, GCP (Cloud Run, Cloud Build), pnpm, Turborepo, Vite, Claude Code</li>
+        <li><span class="label">Additional:</span> Angular, Notion, Slack</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Professional Experience</h2>
+      <div class="role-line">
+        <span><strong>Exxact Corporation</strong> — Software Engineering Intern</span>
+        <span class="role-dates">April 2025 – June 2026 · Fremont, CA</span>
+      </div>
+      <div class="prose">
+        <ul>
+          <li>
+            Led four-phase consolidation of two fragmented component packages into the unified
+            <strong>exxcom-ui design system</strong> — 100+ production components reorganized into
+            an Atomic Design taxonomy with CSS-variable-driven multi-theme architecture serving two
+            storefronts
+          </li>
+          <li>
+            Engineered a MongoDB caching layer for Contentstack CMS with webhook-based invalidation
+            on publish events, cutting API usage on 10 high-traffic pages from
+            <strong>100K+ calls per page per week to near zero</strong> — bringing it under 5M-call
+            limit (from 6M+) without a paid plan increase, and keeping pages online during CMS
+            outages
+          </li>
+          <li>
+            Bootstrapped CI/CD from zero across a 39-repository monorepo: custom Node.js
+            path-based change detection, semantic-release automation with
+            <strong>zero manual release steps since May 2025</strong>, and GCP Workload Identity
+            Federation for keyless deploys
+          </li>
+          <li>
+            Designed multi-layer bot and LLM-agent detection for contact forms — behavioral
+            keystroke scoring, <code>navigator.webdriver</code> fingerprinting, honeypot — blocking
+            Playwright, browser-use, and Stagehand agents with <strong>zero false positives</strong>
+          </li>
+          <li>
+            Led <strong>WCAG 2.1 AA accessibility initiative</strong> across 15+ components (focus
+            design tokens, ARIA attributes, keyboard navigation)
+          </li>
+          <li>Rewrote a Cloud Run blog redirect microservice suffering connection-pool exhaustion</li>
+          <li>
+            Among the first engineers on the team to adopt <strong>Claude Code</strong>, authoring
+            CLAUDE.md memory files now used across multiple projects (including the design system)
+            to encode conventions and context, speeding onboarding and keeping AI-assisted
+            contributions consistent
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section>
+      <h2>Additional Information</h2>
+      <ul class="skills-list">
+        <li><span class="label">Methodologies:</span> Agile, CI/CD, DevOps, Atomic Design, Component-Driven Development</li>
+        <li><span class="label">Soft Skills:</span> Cross-functional Collaboration, Technical Documentation, Code Review, Independent Problem Solving</li>
+      </ul>
+    </section>
+  </article>
+</Base>

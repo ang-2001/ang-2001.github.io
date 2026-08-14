@@ -1,12 +1,15 @@
 ---
 import { getCollection } from 'astro:content';
+import { Icon } from 'astro-icon/components';
 import Base from '../layouts/Base.astro';
+import TechTags from '../components/TechTags.astro';
+import { contactIcons, uiIcons } from '../lib/icons';
 
-// Case studies first, then newest first.
-const projects = (await getCollection('projects')).sort((a, b) => {
-  if (a.data.caseStudy !== b.data.caseStudy) return a.data.caseStudy ? -1 : 1;
-  return b.data.date.valueOf() - a.data.date.valueOf();
-});
+const allProjects = (await getCollection('projects')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+const caseStudies = allProjects.filter((p) => p.data.caseStudy);
+const otherProjects = allProjects.filter((p) => !p.data.caseStudy);
 ---
 
 <Base
@@ -21,60 +24,89 @@ const projects = (await getCollection('projects')).sort((a, b) => {
       100K+ weekly API calls cached to near zero, releases with zero manual steps.
     </p>
     <ul class="contact-links">
-      <li><a href="mailto:chenchhaykyle@gmail.com">Email</a></li>
-      <li><a href="https://github.com/ang-2001">GitHub</a></li>
-      <li><a href="https://www.linkedin.com/in/kyle-chen-computer-scientist/">LinkedIn</a></li>
-      <li><a href="/resume.pdf">Resume (PDF)</a></li>
+      <li>
+        <a href="https://github.com/ang-2001">
+          <Icon class="icon" name={contactIcons.github} aria-hidden="true" />
+          GitHub
+        </a>
+      </li>
+      <li>
+        <a href="https://www.linkedin.com/in/kyle-chen-computer-scientist/">
+          <Icon class="icon" name={contactIcons.linkedin} aria-hidden="true" />
+          LinkedIn
+        </a>
+      </li>
+      <li>
+        <a href="/resume">
+          <Icon class="icon" name={uiIcons.fileText} aria-hidden="true" />
+          Resume
+        </a>
+      </li>
     </ul>
   </section>
 
   <section aria-labelledby="skills-heading">
     <h2 id="skills-heading">Skills</h2>
-    <ul class="skills-list">
-      <li><span class="label">Languages:</span> TypeScript, JavaScript, Python, Java</li>
-      <li><span class="label">Frontend:</span> React, Next.js, Angular, TailwindCSS, Storybook, HTML, CSS</li>
-      <li><span class="label">Backend &amp; Data:</span> Node.js, MongoDB, Express.js, tRPC, DrizzleORM, MySQL</li>
-      <li><span class="label">DevOps &amp; AI:</span> GitHub Actions, Docker, GCP (Cloud Run, Cloud Build), Turborepo, Claude Code</li>
-    </ul>
-  </section>
-
-  <section class="experience" aria-labelledby="experience-heading">
-    <h2 id="experience-heading">Experience</h2>
-    <div class="experience-role">
-      <h3>Exxact Corporation — Software Engineering Intern</h3>
-      <span class="experience-dates">April 2025 – June 2026 · Fremont, CA</span>
+    <div class="skills-groups">
+      <div class="skills-group">
+        <h3>Languages</h3>
+        <TechTags items={['TypeScript', 'JavaScript', 'Python', 'Java']} />
+      </div>
+      <div class="skills-group">
+        <h3>Frontend</h3>
+        <TechTags items={['React', 'Next.js', 'Angular', 'TailwindCSS', 'Storybook', 'HTML', 'CSS']} />
+      </div>
+      <div class="skills-group">
+        <h3>Backend &amp; Data</h3>
+        <TechTags items={['Node.js', 'MongoDB', 'Express.js', 'tRPC', 'DrizzleORM', 'MySQL']} />
+      </div>
+      <div class="skills-group">
+        <h3>DevOps &amp; AI</h3>
+        <TechTags items={['GitHub Actions', 'Docker', 'GCP', 'Cloud Run', 'Cloud Build', 'Turborepo', 'Claude Code']} />
+      </div>
     </div>
-    <p>
-      Owned the frontend platform for two e-commerce storefronts: led the
-      four-phase consolidation of the exxcom-ui design system, built the team's
-      CI/CD from zero across a 39-repository monorepo, and shipped performance,
-      accessibility, and security work with measured outcomes.
-    </p>
-    <p class="stats">580+ commits · 115 merged PRs · 13 months</p>
   </section>
 
   <section id="projects" aria-labelledby="projects-heading">
-    <h2 id="projects-heading">Projects</h2>
+    <h2 id="projects-heading">Case Studies</h2>
     <ul class="project-grid">
       {
-        projects.map((p) => (
+        caseStudies.map((p) => (
           <li class="project-card">
             <h3>{p.data.title}</h3>
             <p class="impact">{p.data.impact}</p>
             <p class="summary">{p.data.summary}</p>
-            <ul class="tags" aria-label="Technologies">
-              {p.data.tags.map((tag) => (
-                <li>{tag}</li>
-              ))}
-            </ul>
-            {p.data.caseStudy && (
-              <a class="read-more" href={`/projects/${p.id}/`}>
-                Read case study <span aria-hidden="true">→</span>
-              </a>
-            )}
+            <TechTags items={p.data.tags} />
+            <a class="read-more" href={`/projects/${p.id}/`}>
+              Read case study <span aria-hidden="true">→</span>
+            </a>
           </li>
         ))
       }
     </ul>
   </section>
+
+  {
+    otherProjects.length > 0 && (
+      <section aria-labelledby="other-projects-heading">
+        <h2 id="other-projects-heading">Other Projects</h2>
+        <ul class="project-grid">
+          {otherProjects.map((p) => (
+            <li class="project-card">
+              <h3>{p.data.title}</h3>
+              <p class="impact">{p.data.impact}</p>
+              <p class="summary">{p.data.summary}</p>
+              <TechTags items={p.data.tags} />
+              {p.data.repo && (
+                <a class="read-more" href={p.data.repo}>
+                  <Icon class="icon" name={contactIcons.github} aria-hidden="true" />
+                  View on GitHub
+                </a>
+              )}
+            </li>
+          ))}
+        </ul>
+      </section>
+    )
+  }
 </Base>

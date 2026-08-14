@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import TechTags from '../../components/TechTags.astro';
 
 export async function getStaticPaths() {
   const caseStudies = await getCollection('projects', ({ data }) => data.caseStudy);
@@ -19,18 +20,13 @@ const { Content } = await render(p);
       <p class="impact">{p.data.impact}</p>
       <p>{p.data.summary}</p>
     </div>
+    <TechTags items={p.data.tags} />
     <p class="meta">
-      {p.data.tags.join(' · ')}
-      {
-        p.data.repo ? (
-          <>
-            {' — '}
-            <a href={p.data.repo}>source code</a>
-          </>
-        ) : (
-          ' — proprietary codebase; outcomes and ownership described below'
-        )
-      }
+      {p.data.repo ? (
+        <a href={p.data.repo}>Source code</a>
+      ) : (
+        'Proprietary codebase; outcomes and ownership described below.'
+      )}
     </p>
     <div class="prose">
       <Content />
