@@ -12,7 +12,7 @@ Live at: https://ang-2001.github.io
 ## Structure
 
 - `src/pages/` — routes (`index.astro` homepage, `projects/[id].astro` case-study template)
-- `src/content/projects/` — project data as Markdown; `caseStudy: true` gets a full case-study page, otherwise it's a homepage card only
+- `src/content/projects/` — project data as Markdown; `caseStudy: true` lists it under Case Studies, otherwise Other Projects. Any project with a Markdown body (all case studies, plus e.g. `waffler.md`) gets its own `/projects/<id>/` page; screenshots live in `src/assets/projects/`
 - `src/layouts/Base.astro` — shared head/header/footer, theme toggle
 - `src/styles/global.css` — design tokens and all site styling (plain CSS, no framework)
 - `public/` — static assets served as-is, including `resume.pdf`

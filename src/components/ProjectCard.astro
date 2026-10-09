@@ -1,0 +1,39 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Icon } from 'astro-icon/components';
+import TechTags from './TechTags.astro';
+import { contactIcons } from '../lib/icons';
+import { hasDetailPage } from '../lib/projects';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { data } = project;
+---
+
+<li class="project-card">
+  <h3>{data.title}</h3>
+  <p class="impact">{data.impact}</p>
+  <p class="summary">{data.summary}</p>
+  <TechTags items={data.tags} />
+  {
+    (hasDetailPage(project) || data.repo) && (
+      <div class="card-actions">
+        {hasDetailPage(project) && (
+          <a class="btn" href={`/projects/${project.id}/`}>
+            {data.caseStudy ? 'Read case study' : 'View details'}
+            <span class="btn-arrow" aria-hidden="true">→</span>
+          </a>
+        )}
+        {data.repo && (
+          <a class="btn" href={data.repo}>
+            <Icon class="icon" name={contactIcons.github} aria-hidden="true" />
+            GitHub
+          </a>
+        )}
+      </div>
+    )
+  }
+</li>
