@@ -29,6 +29,15 @@ npm run build     # static output to dist/
 npm run preview   # serve the built dist/ locally
 ```
 
+### Link-preview image
+
+`public/og.png` (the `og:image` shown when the site is shared) is rendered from `og/og-image.html` with headless Chrome. After editing the HTML, regenerate it from the repo root in Git Bash:
+
+```bash
+"/c/Program Files/Google/Chrome/Application/chrome.exe" --headless --hide-scrollbars \
+  --window-size=1200,630 --screenshot="$(pwd -W)/public/og.png" "file:///$(pwd -W)/og/og-image.html"
+```
+
 ## Deployment
 
 Pushes to `main` deploy automatically via `.github/workflows/deploy.yml` (official Astro GitHub Pages action). GitHub Pages must be set to deploy from **GitHub Actions** in the repo's Settings → Pages.
