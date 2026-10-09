@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import { Icon } from 'astro-icon/components';
 import Base from '../layouts/Base.astro';
 import TechTags from '../components/TechTags.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 import { contactIcons, uiIcons } from '../lib/icons';
 
 const allProjects = (await getCollection('projects')).sort(
@@ -25,19 +26,19 @@ const otherProjects = allProjects.filter((p) => !p.data.caseStudy);
     </p>
     <ul class="contact-links">
       <li>
-        <a href="https://github.com/ang-2001">
+        <a class="btn" href="https://github.com/ang-2001">
           <Icon class="icon" name={contactIcons.github} aria-hidden="true" />
           GitHub
         </a>
       </li>
       <li>
-        <a href="https://www.linkedin.com/in/kyle-chen-computer-scientist/">
+        <a class="btn" href="https://www.linkedin.com/in/kyle-chen-computer-scientist/">
           <Icon class="icon" name={contactIcons.linkedin} aria-hidden="true" />
           LinkedIn
         </a>
       </li>
       <li>
-        <a href="/resume">
+        <a class="btn" href="/resume">
           <Icon class="icon" name={uiIcons.fileText} aria-hidden="true" />
           Resume
         </a>
@@ -70,19 +71,7 @@ const otherProjects = allProjects.filter((p) => !p.data.caseStudy);
   <section id="projects" aria-labelledby="projects-heading">
     <h2 id="projects-heading">Case Studies</h2>
     <ul class="project-grid">
-      {
-        caseStudies.map((p) => (
-          <li class="project-card">
-            <h3>{p.data.title}</h3>
-            <p class="impact">{p.data.impact}</p>
-            <p class="summary">{p.data.summary}</p>
-            <TechTags items={p.data.tags} />
-            <a class="read-more" href={`/projects/${p.id}/`}>
-              Read case study <span aria-hidden="true">→</span>
-            </a>
-          </li>
-        ))
-      }
+      {caseStudies.map((p) => <ProjectCard project={p} />)}
     </ul>
   </section>
 
@@ -91,20 +80,7 @@ const otherProjects = allProjects.filter((p) => !p.data.caseStudy);
       <section aria-labelledby="other-projects-heading">
         <h2 id="other-projects-heading">Other Projects</h2>
         <ul class="project-grid">
-          {otherProjects.map((p) => (
-            <li class="project-card">
-              <h3>{p.data.title}</h3>
-              <p class="impact">{p.data.impact}</p>
-              <p class="summary">{p.data.summary}</p>
-              <TechTags items={p.data.tags} />
-              {p.data.repo && (
-                <a class="read-more" href={p.data.repo}>
-                  <Icon class="icon" name={contactIcons.github} aria-hidden="true" />
-                  View on GitHub
-                </a>
-              )}
-            </li>
-          ))}
+          {otherProjects.map((p) => <ProjectCard project={p} />)}
         </ul>
       </section>
     )

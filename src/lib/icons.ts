@@ -11,6 +11,7 @@ export const contactIcons = {
 export const uiIcons = {
   fileText: 'lucide:file-text',
   download: 'lucide:download',
+  externalLink: 'lucide:external-link',
 };
 
 // Tag/skill text (as written in project frontmatter and the homepage Skills
@@ -43,4 +44,8 @@ export const techIconMap: Record<string, string> = {
   'Claude Code': 'simple-icons:claude',
   Contentstack: 'simple-icons:contentstack',
   'semantic-release': 'simple-icons:semanticrelease',
+  Supabase: 'simple-icons:supabase',
+  PostgreSQL: 'simple-icons:postgresql',
+  'styled-components': 'simple-icons:styledcomponents',
+  Vite: 'simple-icons:vite',
 };

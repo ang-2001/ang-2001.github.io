@@ -1,0 +1,57 @@
+<!doctype html>
+<!-- Source for public/og.png — the link-preview image (og:image) shown when
+     the site is shared on LinkedIn, Slack, etc. Colors mirror the light
+     tokens in src/styles/global.css. Regenerate with the command in README.md. -->
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    background: #ffffff;
+    color: #1b1f24;
+    border-top: 14px solid #1d4ed8;
+    padding: 92px 96px 80px;
+    display: flex;
+    flex-direction: column;
+  }
+  h1 { font-size: 92px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.05; }
+  .role { font-size: 40px; color: #545d66; margin-top: 18px; }
+  .metrics {
+    display: flex;
+    gap: 22px;
+    margin-top: auto;
+    list-style: none;
+  }
+  .metrics li {
+    font-family: "Cascadia Code", Consolas, monospace;
+    font-size: 27px;
+    font-weight: 600;
+    color: #1d4ed8;
+    background: #f5f7f9;
+    border: 2px solid #d8dee4;
+    border-radius: 10px;
+    padding: 14px 22px;
+  }
+  .url {
+    position: absolute;
+    right: 96px;
+    top: 104px;
+    font-size: 26px;
+    color: #545d66;
+  }
+</style>
+</head>
+<body>
+  <p class="url">ang-2001.github.io</p>
+  <h1>Kyle Chen</h1>
+  <p class="role">Software Engineer · Design systems, performance, CI/CD</p>
+  <ul class="metrics">
+    <li>100+ components</li>
+    <li>CMS API calls → ~0</li>
+    <li>0 manual releases</li>
+  </ul>
+</body>
+</html>

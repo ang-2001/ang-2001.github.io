@@ -12,7 +12,7 @@ Live at: https://ang-2001.github.io
 ## Structure
 
 - `src/pages/` — routes (`index.astro` homepage, `projects/[id].astro` case-study template)
-- `src/content/projects/` — project data as Markdown; `caseStudy: true` gets a full case-study page, otherwise it's a homepage card only
+- `src/content/projects/` — project data as Markdown; `caseStudy: true` lists it under Case Studies, otherwise Other Projects. Any project with a Markdown body (all case studies, plus e.g. `waffler.md`) gets its own `/projects/<id>/` page; screenshots live in `src/assets/projects/`
 - `src/layouts/Base.astro` — shared head/header/footer, theme toggle
 - `src/styles/global.css` — design tokens and all site styling (plain CSS, no framework)
 - `public/` — static assets served as-is, including `resume.pdf`
@@ -27,6 +27,15 @@ npm install
 npm run dev       # dev server at localhost:4321, hot reload
 npm run build     # static output to dist/
 npm run preview   # serve the built dist/ locally
+```
+
+### Link-preview image
+
+`public/og.png` (the `og:image` shown when the site is shared) is rendered from `og/og-image.html` with headless Chrome. After editing the HTML, regenerate it from the repo root in Git Bash:
+
+```bash
+"/c/Program Files/Google/Chrome/Application/chrome.exe" --headless --hide-scrollbars \
+  --window-size=1200,630 --screenshot="$(pwd -W)/public/og.png" "file:///$(pwd -W)/og/og-image.html"
 ```
 
 ## Deployment
